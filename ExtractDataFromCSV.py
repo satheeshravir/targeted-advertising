@@ -95,5 +95,5 @@ CV_COMP_CHISQR)
 
 
 
-obj = WiFiDataExtraction("mongodb://mongodb0.example.net:27019","quant","customers")
+obj = WiFiDataExtraction("mongodb://localhost:27017/","quant","customers")
 obj.extractCustomerCSV("/home/maxsteal/Downloads/customers.csv")
