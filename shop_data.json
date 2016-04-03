@@ -1,0 +1,120 @@
+{
+    "shops": [
+        {
+	    "group": "4",
+            "name": "Pizza Bocca Lupo",
+            "desc": "Pizza Bocca Lupo was started by a native Neapolitan with a passion for thin crust pizza and who was trained in Naples, Italy by one of the first pizzerias to be VPN (Verace Pizza Napoletana) certified.  Pizza Bocca Lupo is the first Neapolitan pizzeria in the south bay that bakes in a hand-made brick oven imported from Naples. The oven cooks the pizza in 1-2 minutes at very high temperatures giving them a distinct taste and texture. The pizza will be baked using the same ingredients as the best pizzerias in Naples:  very fine Tipo 00 flour, authentic San Marzano Tomatoes grown in the volcanic soil of Mount Vesuvio, fresh mozzarella (buffalo or cow), and more. High quality locally-found ingredients will also be available."
+        },
+        {
+	    "group": "6",
+            "name": "Vino Vino wine bar",
+            "desc": "We know there are a lot of people out there just like us....fans of wine, but hate the BS that comes with it. We couldn't find anything that catered to us, so we went out and started our own bar.  We emphasize great music, great food and, of course, great wine. We have 13 wines on tap and another 3-dozen in the bottle, featuring local wineries"
+        },
+        {
+	    "group": "4",
+            "name": "Robee's Falafel",
+            "desc": "Inspired by the rich Mediterranean culture, Robee’s Falafel offers traditional family recipes with a modern twist. This casual dining location offers the finest fresh ingredients sure to delight your taste buds, and keep you coming back for more. We offer a selection of wraps, including our famous falafel wrap, and a variety of plates, all reasonably priced."
+        },
+        {
+	    "group": "3",
+            "name": "Treatbot",
+            "desc": "Described as an ice cream truck of the future, Treatbot serves dessert from local and sustainable sources under the guidance of food truck entrepreneur and Moveable Feast organizer Ryan Sebastian. The flavors rotate nightly, but horchata, ube, macapuno and cantaloupe are regular favorites. The 408 (caramel, Oreo and vanilla ice cream) is the most popular selection."
+        },
+        {
+	    "group": "1",
+            "name": "Blush Ice Bar & Raw Kitchen",
+            "desc": "Enter Blush Raw Bar Lounge… a welcome-as-you-are, relaxed and contemporary atmosphere.  An excellent place which provides people an opportunity to socialize with music, food, cocktails and exceptional service.  Your taste meets a menu that boasts a variety of innovative raw dishes.  Along with a traditional drink selection, our cocktail menu features a unique and innovative fusion of slush mix drinks yet to be introduced in the Bay Area.  Downtown San Jose is ready for a new movement in an upscale yet comfortable and consistent dining experience, come in and find out what makes you BLUSH."
+        },
+        {
+	    "group": "7",
+            "name": "On A Roll",
+            "desc": "The On A Roll Restaurant was founded by Chi Kieu Vo. The owners and staff are proud of their culinary excellence and personal involvement in every facet of the business. Their menu is particularly special, and on weekends, long lines wait for the opportunity to order their renowned fresh Appetizers, Sandwiches & House Specials, you will experience perfection. The On A Roll is located at San Jose and is only open for Breakfast, Lunch & Dinner."
+        },
+        {
+	    "group": "5",
+            "name": "Loteria Taco Bar",
+            "desc": "This gourmet taco restaurant serves juicy, braised meats—from habanero mango chicken to beef barbacoa—in homemade tortillas. The menu has expanded to include salads, tostaditos, nachos and fried sweet plantains."
+        },
+        {
+	    "group": "4",
+            "name": "CaliDog",
+            "desc": "CaliDog Hot Dogs offers a unique twist to an all American favorite!  What started out with one fusion hot dog has now turned into five, each dressing up the familiar hot dog with diverse multicultural toppings. We are excited to bring the community all five signature hot dogs, tasty sides, and fun drinks!  CaliDog Hot Dogs offer San Pedro Market patrons on the spot satisfaction as well as a market catering option. We also offer special catering at corporate events, weddings, birthdays, and other special events."
+        },
+        {
+	    "group": "4",
+            "name": "Pasta Fresca",
+            "desc": "Pasta Fresca San Jose: Home made Italian cuisine at the San Pedro Square Market in Downtown San Jose.  We make our pasta and sauces from scratch and use locally sourced ingredients. We offer oven dishes like lasagna, mac 'n cheese and dishes made to order."
+        },
+        {
+	    "group": "3",
+            "name": "Phonomenal Noodle House",
+            "desc": "This noodle house serves traditional Vietnamese pho—a piping hot bowl of noodle soup with meat and the choice of cilantro and bean sprouts on top. Special sausage rolls and rice dishes are also available."
+        },
+        {
+	    "group": "1",
+            "name": "Chocatoo",
+            "desc": "When you find yourself wanting to satisfy that sweet tooth craving, c'mon over!  Chocatoo is a new dessert bar with an Australian twist! We specialize in a variety of mouthwatering desserts including cakes, cupcakes, cake pops, cheesecake, tiramisu, English sticky date pudding and other delectable English puddings, French macaroons, Australian pavlova, clafoutis, rum baba, chocolate fondue...and a whole lot more!  Chocatoo is also proud to serve a fine selection of artisan chocolates made of high quality chocolate by our very own chocolatier. Why not try an Australian long black or a flat white with your dessert?  We have a range of hot and cold beverages made to order."
+        },
+        {
+	    "group": "1",
+            "name": "Konjoe Burger Bar",
+            "desc": "A one-stop shop for burgers and sides with influences from across Asia Pacific. All burgers and sides are created with freshly ground patties and quality ingredients. Konjoe Burger Bar will bring these delicious contemporary burgers made by Chef Joseph Camacho to San Pedro Square Market where patrons are more than welcome to dine-in or take-out. "
+        },
+        {
+	    "group": "1",
+            "name": "Bray Butcher Block & Bistro",
+            "desc": "At Bray we focus on the beauty and majesty of meat. We pull inspiration from all over the world, taking flavors from the smoky meats of the American south, to the robustly seasoned meats of Jamaica and Mexico, to classic deli meats, and fuse them with our own creative twists. We cure all of our own deli meats in-house using minimal nitrates and preservatives to produce a healthier product. We make a point to convey to every customer how important it is to provide them with grass fed, hormone free, natural meats accompanied by sauces and salad dressings made from scratch. We strive to produce new options to expand your culinary palette and give you something new to experience. We're finding our niche in the culinary world, evolving and experimenting every day. Bray has a signature style, though it may be hard to categorize it is definitely not hard to enjoy!"
+        },
+        {
+	    "group": "3",
+            "name": "Arepa & Más",
+            "desc": "Arepa is a gluten free flatbread made of ground maize dough and filled with different items such as shredded beef, shredded chicken, black beans, chicken salad, also we offer empanadas, patacones made with green plantains fried, served with shredded beef, shredded chicken, cheese and some amazing disserts. All the flavors that you can try are typical of "Colombian Cuisine". Arepa & Más is located in the Market Hall at San Pedro Square Market, stop on, try our products and for sure you will want to go back!"
+        },
+        {
+	    "group": "2",
+            "name": "Spuds USA",
+            "desc": "Two crazy dreamers from the Americas' met in Australia in 2009 and  merging both their dreams, passions and skills, they began to develop the concept of SPUDS USA.  They dreamt of real food that can be different, fast and healthy so, here they are in 2014 opening their prototype and first loaded baked potato shop for you to enjoy in the Heart of the Silicon Valley. Spuds USA is the best way to enjoy real food served to you promptly. The base of our meal is a delicious and soft, Baked potato. Added that we offer you less carbs and calories than average sub sandwich bread, plus a huge variety of delicious organic toppings, your meal will be as healthy as you decide."
+        },
+        {
+	    "group": "7",
+            "name": "Lou's Beach Shack",
+            "desc": "Lou's Beach Shack is now serving in San Pedro Square Market. Walk up and get our New England Clam Chowder or Famous Deep Fried Calamari.. There's a delicious Shrimp Roll or the always tempting Fish and Chips. We also feature a Po' Boy Andouille Sausage & Shrimp Sandwich or Babe's Beach Burger plus our own Spicy Catfish Sandwich.  Try the Nantucket style Grilled Cheese Sandwich or any of our other selections.. Did someone say Deep Fried Artichoke Hearts? You're bound to enjoy the menu at our little stand."
+        },
+        {
+	    "group": "6",
+            "name": "Oni Mexicatessen",
+            "desc": "We are a mexicatessen specializing in artisan tortas, salads, soups and fresh juices."
+        },
+        {
+	    "group": "5",
+            "name": "San Pedro Square Market Bar",
+            "desc": "The San Pedro Square Market Bar is located inside of the San Pedro Square Market."
+        },
+        {
+	    "group": "2",
+            "name": "Market Beer Co.",
+            "desc": "Market Beer Co"
+        },
+        {
+	    "group": "8",
+            "name": "SPSM Garage Bar",
+            "desc": "SPSM Garage Bar"
+        },
+        {
+	    "group": "8",
+            "name": "B2 Coffee",
+            "desc": "Bellano 2 or B2, is now open in the San Pedro Square Market, come enjoy our coffee and espresso beverages in the new inviting and friendly atmosphere.  Each espresso beverage is hand crafted to order by our fun and friendly staff. We blend artistry, science and creativity together to provide a uniquely memorable coffee experience for you.  You will find a variety of coffees available at the café from our two roasters: Verve, located in Santa Cruz and Sightglass from San Francisco.  Our offerings change monthly, based on the seasonality and availability of beans from different regions. You can try them all at our monthly coffee socials!"
+        },
+        {
+	    "group": "6",
+            "name": "Crewners Barber Shop",
+            "desc": "Crewners is a unique, hig-end full service barbershop providing exceptional customer service, in a nostalgic and relaxing atmosphere. Integrating vintage decor with modern furnishings will distinguish Crewners Barbershop above any others. Crewners mission is to provide the utmost level of service and professionalism while maintaining the integrity and distinction the public deserves."
+        }
+        {
+	    "group": "7",
+            "name": "San Pedro Square Gift Shop",
+            "desc": "Located between On a Roll and Little Chef Counter, the gift shop sells newspapers, candy, greeting cards and random trinkets, from purses to bracelets."
+        }
+
+    ]
+}
