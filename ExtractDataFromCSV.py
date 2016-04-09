@@ -1,7 +1,9 @@
 import datetime 
 from pymongo import * 
-import cv2 
 import numpy as np 
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
  
  
 class WiFiDataExtraction: 
@@ -19,20 +21,41 @@ class WiFiDataExtraction:
         return collection 
 
     def extractCustomerCSV(self, filePath):
-        print "test"
         readFile = open(filePath, "r")
         readFile.readline()
         handle = self.dbHandle()         
+        histValues = []
+        logins = {}
+        idTerm = ""
         for line in readFile:
             columns = line.strip().split(",")
-            user_details = { "device_id" : columns[1] , "first_login": columns[2], 
-            "mall_first_login": columns[3], "access_point_first": columns[4], "last_login": columns[5],
-            "created_at": datetime.datetime.now(), "mall_last_login": columns[6],
-            "access_point_last": columns[7]}
-            my_data = handle.insert_one(user_details) 
-            print my_data
+            user_details = { "dev_id": columns[2], "account_id": columns[0], 
+            "ap_id": columns[1], "date": columns[3].split()[0], "time":columns[3].split()[1],
+            "created_at": datetime.datetime.now()}
+            if idTerm == "":
+                idTerm = columns[2]
+                logins[columns[2]] = {}
+                key = user_details["date"]+user_details["time"].split(":")[0]
+                logins[columns[2]][key] = user_details
+            elif idTerm != "" and columns[2] in logins:
+                key = user_details["date"]+user_details["time"].split(":")[0]
+                logins[columns[2]][key] = user_details
+
+            else:
+                for key, value in logins.items():
+                    for key, item in value.items():
+                        histValues.append(int(item["time"].split(":")[0]))
+                        my_data = handle.insert_one(item)                     
+                idTerm = ""
+                logins = {}
+        plt.hist(histValues)
+        plt.show()
+
+
+            
+        #print my_data
 
 
 
-obj = WiFiDataExtraction("mongodb://localhost:27017/","quant","customers")
-obj.extractCustomerCSV("/home/maxsteal/Downloads/customers.csv")
+obj = WiFiDataExtraction("mongodb://localhost:27017/","quant","logins")
+obj.extractCustomerCSV("/home/maxsteal/Downloads/logins.csv")
