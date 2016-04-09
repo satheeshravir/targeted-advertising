@@ -45,6 +45,7 @@ class WiFiDataExtraction:
                 for key, value in logins.items():
                     for key, item in value.items():
                         histValues.append(int(item["time"].split(":")[0]))
+                        #Comment the below line if you just want a histogram
                         my_data = handle.insert_one(item)                     
                 idTerm = ""
                 logins = {}
