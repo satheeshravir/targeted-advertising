@@ -31,27 +31,38 @@ def getStops(n_shops,num_visits,sm55):
 	#modeling number of stops in a visit as a gamma process
 	if gender:
 		if sm55:
-			sp = np.random.gamma(2.057,0.957)
-			leisure = np.random.gamma(11.973,0.279)
+			sp_stops = np.random.gamma(2.057,0.957)
+			leisure_stops = np.random.gamma(11.973,0.279)
 		else:
-			sp = np.random.gamma(2.773,0.721)
-			leisure = np.random.gamma(64.515,0.035)
+			sp_stops = np.random.gamma(2.773,0.721)
+			leisure_stops = np.random.gamma(64.515,0.035)
 	else:
 		if sm55:
-			sp = np.random.gamma(4.331,0.623)
-			leisure = np.random.gamma(711.11,0.006)
+			sp_stops = np.random.gamma(4.331,0.623)
+			leisure_stops = np.random.gamma(711.11,0.006)
 		else:
-			sp = np.random.gamma(1.897,1.270)
-			leisure = np.random.gamma(31.21,0.138)
-	sp = int(sp)
-	leisure = int(leisure)
+			sp_stops = np.random.gamma(1.897,1.270)
+			leisure_stops = np.random.gamma(31.21,0.138)
 	shop_visits = np.zeros(n_shops,dtype='u4')
-	sp_visits = round(0.65 * num_visits)
-	leisure_visits = round(0.35 * num_visits)
-	sp_shops = np.random.random_integers(0,n_shops-1,min(sp,n_shops))
-	leisure_shops = np.random.random_integers(0,n_shops-1,min(leisure,n_shops)) 
-	shop_visits[sp_shops] = sp_visits
-	shop_visits[leisure_shops] = leisure_visits
+	sp_stops = int(round(sp_stops)) # no. of specific stops
+	leisure_stops = int(round(leisure_stops)) # no. of leisure stops
+	sp_visits = int(round(0.65 * num_visits*sp_stops)) #total number  of specific stops
+	leisure_visits = int(round(0.35 * num_visits*leisure_stops)) #total number of leisure stops
+	sp_shops = np.random.random_integers(0,n_shops-1,min(sp_stops,n_shops)) # id of specific stops
+	leisure_shops = np.random.random_integers(0,n_shops-1,min(leisure_stops,n_shops)) # id of leisure stops
+	
+	sp_distr = np.random.rand(sp_stops)
+	leisure_distr = np.random.rand(leisure_stops)
+	sp_distr = np.round(sp_visits*sp_distr/np.sum(sp_distr)) #distribution of specific stops among  specific shops
+	leisure_distr = np.round(leisure_visits*leisure_distr/np.sum(leisure_distr)) # distribution of leisure stops among leisure shops
+	ind = 0	
+	for i in sp_shops:
+		shop_visits[i] = min(num_visits,sp_distr[ind])
+		ind += 1
+	ind = 0	
+	for i in leisure_shops:	
+		shop_visits[i] = min(num_visits,leisure_distr[ind])
+		ind += 1
 	return shop_visits	
 
 if __name__ == "__main__":
