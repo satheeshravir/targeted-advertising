@@ -2,8 +2,9 @@ import numpy as np
 import sys
 #sample number of annual visits based on age group
 def getNumberVisits(ageGroup):
-	mean = [3.7,3.2,3,2.9,3,3.6]
+	mean = [3.7,3.2,3,2.9,3,3.6] #mean of poisson distribution for different age groups
 	ind = -1
+	#identifying age group
 	if ageGroup <= 0.02: #12-17
 		ind = 0
 	elif ageGroup <= 0.27 and ageGroup > 0.02: #18-24
@@ -16,13 +17,18 @@ def getNumberVisits(ageGroup):
 		ind = 4
 	else: #>65
 		ind = 5
-	return [ind,np.random.poisson(mean[ind]*12)]	 	
+	sum = 0
+	#simulating visits for a year 
+	for i in range(12):
+		sum += np.random.poisson(mean[ind])
+	return [ind < 4,sum]	 #return indicator if younger than 55 and total number of visits for a year	
 	
 def getStops(n_shops,num_visits,sm55):
-	#65% visits - specific 35% - leisure	
+	#65% visits - specific, 35% - leisure	
 	sp = 0
 	leisure = 0	
 	gender = np.random.rand(1) >= 0.5
+	#modeling number of stops in a visit as a gamma process
 	if gender:
 		if sm55:
 			sp = np.random.gamma(2.057,0.957)
@@ -54,5 +60,5 @@ if __name__ == "__main__":
 	for i in range(n_visitors):
 		tup = getNumberVisits(values[i])
 		data[i,0] = tup[1]
-		data[i,1:] = getStops(n_shops,tup[1],tup[0] < 4)  
+		data[i,1:] = getStops(n_shops,tup[1],tup[0])  
 	np.savetxt('simulated_data.csv',data,delimiter=',')
