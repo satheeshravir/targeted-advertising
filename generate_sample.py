@@ -43,6 +43,8 @@ def getStops(n_shops,num_visits,sm55):
 		else:
 			sp = np.random.gamma(1.897,1.270)
 			leisure = np.random.gamma(31.21,0.138)
+	sp = int(sp)
+	leisure = int(leisure)
 	shop_visits = np.zeros(n_shops,dtype='u4')
 	sp_visits = round(0.65 * num_visits)
 	leisure_visits = round(0.35 * num_visits)
@@ -51,6 +53,7 @@ def getStops(n_shops,num_visits,sm55):
 	shop_visits[sp_shops] = sp_visits
 	shop_visits[leisure_shops] = leisure_visits
 	return shop_visits	
+
 if __name__ == "__main__":
 #get number of visitors and number of shops from 
 	n_visitors = int(sys.argv[1])	
@@ -60,5 +63,6 @@ if __name__ == "__main__":
 	for i in range(n_visitors):
 		tup = getNumberVisits(values[i])
 		data[i,0] = tup[1]
-		data[i,1:] = getStops(n_shops,tup[1],tup[0])  
-	np.savetxt('simulated_data.csv',data,delimiter=',')
+		data[i,1:] = getStops(n_shops,tup[1],tup[0]) 
+	data.astype('int')	 
+	np.savetxt('simulated_data.csv',data,'%d',delimiter=',')
