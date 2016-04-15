@@ -43,7 +43,7 @@ def getStops(n_shops,num_visits,sm55):
 		else:
 			sp_stops = np.random.gamma(1.897,1.270)
 			leisure_stops = np.random.gamma(31.21,0.138)
-	shop_visits = np.zeros(n_shops,dtype='u4')
+	shop_visits = np.zeros(n_shops,dtype='float32')
 	sp_stops = int(round(sp_stops)) # no. of specific stops
 	leisure_stops = int(round(leisure_stops)) # no. of leisure stops
 	sp_visits = int(round(0.65 * num_visits*sp_stops)) #total number  of specific stops
@@ -63,17 +63,17 @@ def getStops(n_shops,num_visits,sm55):
 	for i in leisure_shops:	
 		shop_visits[i] = min(num_visits,leisure_distr[ind])
 		ind += 1
-	return shop_visits	
+	return shop_visits*10.0/num_visits	
 
 if __name__ == "__main__":
 #get number of visitors and number of shops from 
 	n_visitors = int(sys.argv[1])	
 	n_shops = int(sys.argv[2])
-	data = np.zeros((n_visitors,n_shops+1),dtype='int32')
+	data = np.zeros((n_visitors,n_shops+1),dtype='float32')
 	values = np.random.rand(n_visitors)
 	for i in range(n_visitors):
 		tup = getNumberVisits(values[i])
 		data[i,0] = tup[1]
 		data[i,1:] = getStops(n_shops,tup[1],tup[0]) 
 	data.astype('int')	 
-	np.savetxt('simulated_data.csv',data,'%d',delimiter=',')
+	np.savetxt('simulated_data.csv',data,'%.2f',delimiter=',')
