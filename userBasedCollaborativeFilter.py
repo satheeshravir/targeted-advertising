@@ -12,11 +12,11 @@ def loadData(filename):
     with open(filename, 'r') as fileData:
         next(fileData)
         for i, data in enumerate(fileData):
-            users.setdefault(i, int(data.split(',')[0]))
-            normData = normalizeValue(data.split(',')[1:], data.split(',')[0])
+            users.setdefault(i, float(data.split(',')[0]))
+            normData = [float(i) for i in data.split(',')[1:]]
             for j in range(len(data.split(',')[1:])):
                 shopVisits.setdefault(j, 0)
-                shopVisits[j] += int(data.split(',')[j])
+                shopVisits[j] += float(data.split(',')[j])
                 matrix[i][j] = normData[j]
 
     return users, shopVisits, matrix
@@ -87,7 +87,7 @@ def weightSimilarity(users, shopVisits, matrix, username, n, k):
     recommendedShops.sort(key=lambda x: (-x[0], x[1]))
 
     reco = 0
-    print(recommendedShops)
+    
     while reco != k:
         for r, m in enumerate(recommendedShops[reco]):
             if r == 0:
