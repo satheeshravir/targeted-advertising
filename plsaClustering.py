@@ -125,17 +125,30 @@ def computeMAE(cratings,shop_index,X_test):
 		mae += abs(original_rating-predicted_rating)
 	return mae/nrows
 
-def tuneThreshold(k,all_ratings):
-	thresholds = [0.0008,0.0007,0.0006,0.0005,0.0004,0.0003,0.0002,0.0001]
+def tuneThreshold(k,txt):
+	nndata = np.loadtxt('dense_matrix.csv',delimiter=',')
+	nndata = nndata[:,1:]
+	plsadata = np.loadtxt('simulated_data.csv',delimiter=',')
+	plsadata = plsadata[:,1:]
+	if(txt == 'plsa'):
+		thresholds = [0.0008,0.0007,0.0006,0.0005,0.0004,0.0003,0.0002,0.0001]
+	else:
+		thresholds = [0.0004,0.0003,0.0002,0.0001,0.00005,0.00001]
 	nt = len(thresholds)
-	mae = np.zeros(8,dtype='float32')
-	dim = all_ratings.shape
-	nUsers = dim[0]
+	ncv = 5 #number of cross validations
+	mae = np.zeros(nt,dtype='float32')
 	#use cross validation to select best threshold
-	for i in range(5):
+	for i in range(ncv):
 		print "Cross Validation iteration " + str(i+1) 
 		#split training and test data
-		X_train,X_test = train_test_split(all_ratings,test_size=0.2,random_state=42)
+		index = np.random.randint(0,10000,8000)
+		index2 = np.array([z for z in range(10000) if z not in index],dtype='int32')
+		if(txt == 'plsa'):		
+			X_train = plsadata[index,:]
+		else:		
+			X_train = nndata[index,:]
+		X_test = plsadata[index2,:]
+		
 		#create test data
 		shop_index = hideShopRatings(X_test)
 		#compute the cluster values
@@ -149,22 +162,103 @@ def tuneThreshold(k,all_ratings):
 				mae[t] += 100
 			else:
 				mae[t] += computeMAE(cratings,shop_index,X_test) 
+	mae = mae/ncv
 	print mae
-	mae = mae/5
+	np.savetxt('figures/'+txt+'_MAE_thresholds.txt',mae,'%.3f')
 	plt.plot(thresholds,mae)
 	plt.xlabel('Threshold')
 	plt.ylabel('Mean Average Error')
-	plt.show()
+	plt.savefig('figures/'+txt+'_threshold.png')
 
-#tune model for different thresholds
-def tuneK(threshold,all_ratings):
-		
+#tune number of clusters
+def tuneClusterCount(threshold,txt):
+	nndata = np.loadtxt('dense_matrix.csv',delimiter=',')
+	nndata = nndata[:,1:]
+	plsadata = np.loadtxt('simulated_data.csv',delimiter=',')
+	plsadata = plsadata[:,1:]
+	
+	Kvals = [10,15,20,25,30,35,40,45]
+	nk = len(Kvals)
+	mae =np.zeros(nk,dtype='float32')
+	ncv = 3
+	for i in range(ncv):
+		print "Cross Validation iteration: " + str(i+1) 
+		#split training and test data
+		index = np.random.randint(0,10000,8000)
+		index2 = np.array([z for z in range(10000) if z not in index],dtype='int32')
+		if(txt == 'plsa'):		
+			X_train = plsadata[index,:]
+		else:		
+			X_train = nndata[index,:]
+		X_test = plsadata[index2,:]
+				
+		#create test data
+		shop_index = hideShopRatings(X_test)
+		#compute mae for different thresholds
+		for k in range(nk):
+			print "Cluster Size: " + str(Kvals[k])
+			cluster = plsaCluster(Kvals[k],X_train)
+			cluster.initializeParameters()
+			cluster.learnParameters()
+			cratings = cluster.getClusterRatings(threshold)
+			if(cratings == None):
+				mae[k] += 100
+			else:
+				mae[k] += computeMAE(cratings,shop_index,X_test) 
+	mae = mae/ncv
+	print mae
+	np.savetxt('figures/'+txt+'_nk.csv',mae,'%.3f')
+	plt.plot(Kvals,mae)
+	plt.xlabel('No. of Clusters')
+	plt.ylabel('Mean Average Error')
+	plt.savefig('figures/'+txt+'_nk.png')
+
+#comparing simple plsa with plsa enhanced with dense matrix from nn
+def compareNNplsa():
+	ncv = 10
+	nn_cv = np.zeros(ncv) #cv error for nn based cf
+	p_cv = np.zeros(ncv) # cv error for plsa based cf
+	threshold = [0.0008,0.00025]	
+	nK = [10,15]
+	nndata = np.loadtxt('dense_matrix.csv',delimiter=',')
+	nndata = nndata[:,1:]
+	plsadata = np.loadtxt('simulated_data.csv',delimiter=',')
+	plsadata = plsadata[:,1:]
+	for i in range(ncv):
+		print 'Cross Validation fold ' + str(i+1)
+		index = np.random.randint(0,10000,8000)
+		index2 = np.array([z for z in range(10000) if z not in index],dtype='int32')
+		P_train = plsadata[index,:]
+		N_train = nndata[index,:]
+		Test = plsadata[index2,:]
+		shop_index = hideShopRatings(Test)
+
+		#compute error for simple plsa cluster
+		cluster1 = plsaCluster(nK[0],P_train)
+		cluster1.initializeParameters()
+		cluster1.learnParameters()
+		cratings1 = cluster1.getClusterRatings(threshold[0])				
+		p_cv[i] = computeMAE(cratings1,shop_index,Test)
+
+		#compute error for nn enhanced plsa cluster
+		cluster2 = plsaCluster(nK[1],N_train)
+		cluster2.initializeParameters()
+		cluster2.learnParameters()
+		cratings2 = cluster2.getClusterRatings(threshold[1])
+		nn_cv[i] = computeMAE(cratings2,shop_index,Test)
+	print p_cv
+	print nn_cv
+	np.savetxt("simple_plsa_error.csv",p_cv,'%.2f',delimiter=',')
+	np.savetxt('nn_plsa_error.csv',nn_cv,'%.2f',delimiter=',')
+
 if __name__ == "__main__":
 	data = np.loadtxt(sys.argv[1],delimiter=',')
 	#cratings = np.loadtxt('GUI_code/model',delimiter=' ')
 	#sidex = hideShopRatings(data[:,1:])	
 	#print computeMAE(cratings,sidex,data[:,1:])
-	tuneThreshold(15,data[:,1:])	
+	#tuneThreshold(15,'nn')	
+	#tuneClusterCount(0.00025,'nn')
+	compareNNplsa()	
 	#cluster1 = plsaCluster(15,data[:,1:])
 	#cluster1.initializeParameters()
 	#cluster1.learnParameters()	
@@ -172,6 +266,6 @@ if __name__ == "__main__":
 	#plt.xlabel('Iteration')
 	#plt.ylabel('Negative log likelihood')	
 	#plt.show()
-	#cluster1.computeClusterRatings()
-	#cluster1.saveModel()
+	#cratings = cluster1.getClusterRatings(0.00025)
+	#np.savetxt('GUI_code/model',cratings,'%.2f')
 	
